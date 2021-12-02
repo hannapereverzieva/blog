@@ -13,6 +13,7 @@ import { MainLayoutComponent } from './shared/components/main-layout/main-layout
 import { HomeComponent } from './home/home.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { PostComponent} from "./shared/components/post/post.component";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PostComponent} from "./shared/components/post/post.component";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,

@@ -1,1 +1,52 @@
-<p>create-page works!</p>
+<form
+  [formGroup]="postForm"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="10px"
+  (ngSubmit)="submit()">
+  <h2>New post creation</h2>
+  <mat-form-field appearance="fill">
+    <label for="title">Title:</label>
+    <input
+      id="title"
+      type="text"
+      matInput
+      formControlName="title">
+    <mat-error *ngIf="title?.touched && title?.invalid " class="validation">
+      <small *ngIf="title?.errors?.['required']">Title should not be empty</small>
+      <small *ngIf="title?.errors?.['maxlength']">
+        Cut the title length. Exceeded: {{title?.errors?.['maxlength'].actualLength -
+        title?.errors?.['maxlength'].requiredLength}} symbols.
+      </small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <label for="author">Author:</label>
+    <input
+      id="author"
+      type="text"
+      matInput
+      formControlName="author">
+    <mat-error *ngIf="author?.touched && author?.invalid " class="validation">
+      <small *ngIf="author?.errors?.['required']">Field Author should not be empty</small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <label for="author">Content:</label>
+    <textarea
+      cdkTextareaAutosize
+      id="content"
+      type="text"
+      matInput
+      formControlName="content"> </textarea>
+    <mat-error *ngIf="content?.touched && content?.invalid " class="validation">
+      <small *ngIf="content?.errors?.['required']">Please share your thoughts:)</small>
+
+    </mat-error>
+  </mat-form-field>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="postForm.invalid">Save post</button>
+</form>

@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { CreatePageComponent } from './create-page/create-page.component';
@@ -10,9 +10,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
+import { PostNewPostService } from "./shared/services/post-new-post.service";
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -42,9 +44,11 @@ import {MatInputModule} from "@angular/material/input";
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   exports: [RouterModule],
+  providers: [PostNewPostService]
 })
 export class AdminModule {
 
