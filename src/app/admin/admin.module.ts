@@ -6,15 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { FeedPageComponent } from './feed-page/feed-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
 import { PostNewPostService } from "./shared/services/post-new-post.service";
-import { MatCardModule } from '@angular/material/card';
+import { SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -37,15 +30,8 @@ import { MatCardModule } from '@angular/material/card';
         ]
       }
     ]),
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule
+    SharedModule,
+    RouterModule
   ],
   exports: [RouterModule],
   providers: [PostNewPostService]
