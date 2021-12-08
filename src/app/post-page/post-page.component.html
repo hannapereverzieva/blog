@@ -1,15 +1,17 @@
-<mat-card class="example-card">
+<mat-card *ngIf="single_post != undefined; else error_message" class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <mat-card-title>{{single_post.title}}</mat-card-title>
+    <mat-card-subtitle>
+      <span>{{single_post.author}}</span>
+      <br>
+      <span>{{single_post.date | date}}</span>
+    </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-content>
     <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
+      {{single_post.content}}
     </p>
   </mat-card-content>
   <mat-card-actions>
@@ -20,3 +22,9 @@
       [routerLink]="['/']">To the home page</button>
   </mat-card-actions>
 </mat-card>
+<ng-template #error_message>
+  <p >Select a post from a home page!</p>
+  <button
+    mat-button
+    [routerLink]="['/']">To the home page</button>
+</ng-template>

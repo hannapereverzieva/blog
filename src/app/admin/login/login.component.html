@@ -34,5 +34,6 @@
     type="submit"
     mat-raised-button
     color="primary"
-    [disabled]="loginForm.invalid">Login</button>
+    [disabled]="loginForm.invalid"
+    [routerLink]="['/admin', 'feed']">Login</button>
 </form>

@@ -1,6 +1,6 @@
 <div fxLayout="column"
      fxLayoutAlign="center center"
      fxLayoutGap="10px"
-     class="posts" *ngFor="let post of [1,2,3]">
-  <app-post></app-post>
+     class="posts" *ngFor="let post of allPostsFromServer">
+  <app-post [particular_post]="post"></app-post>
 </div>

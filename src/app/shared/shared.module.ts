@@ -8,6 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { TransferPostService } from "./services/transfer-post.service";
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { MatInputModule } from "@angular/material/input";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule
-  ]
+  ],
+  providers: [ TransferPostService ]
 })
 export class SharedModule { }
