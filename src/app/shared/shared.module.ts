@@ -9,9 +9,13 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { TransferPostService } from "./services/transfer-post.service";
+import { PostComponent } from "./components/post/post.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PostComponent
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -22,7 +26,8 @@ import { TransferPostService } from "./services/transfer-post.service";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    RouterModule
   ],
   exports: [
     FlexLayoutModule,
@@ -33,7 +38,8 @@ import { TransferPostService } from "./services/transfer-post.service";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    PostComponent
   ],
   providers: [ TransferPostService ]
 })

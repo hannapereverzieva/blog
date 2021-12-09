@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from "../admin/shared/interfaces";
+import { Post } from "../shared/interfaces";
 
 @Component({
   selector: 'app-home',

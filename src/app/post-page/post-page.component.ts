@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from "../admin/shared/interfaces";
+import { Post } from "../shared/interfaces";
 import { TransferPostService } from "../shared/services/transfer-post.service";
 
 @Component({

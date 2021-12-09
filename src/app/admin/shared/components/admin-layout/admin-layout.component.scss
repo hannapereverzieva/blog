@@ -5,11 +5,16 @@ mat-toolbar {
 }
 a {
   text-decoration: none;
+  color: black;
 }
 
 .navigation-items {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.active {
+  opacity: 0.5;
 }
 

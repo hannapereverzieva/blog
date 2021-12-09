@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Post } from "../../../admin/shared/interfaces";
+import { Post } from "../../interfaces";
 import { TransferPostService } from "../../services/transfer-post.service";
 
 @Component({
@@ -9,6 +9,7 @@ import { TransferPostService } from "../../services/transfer-post.service";
 })
 export class PostComponent implements OnInit {
   @Input() public particular_post!: Post;
+  @Input() public openButtonIsVisible!: boolean;
   constructor(private _transferPostService: TransferPostService) { }
 
   ngOnInit(): void {

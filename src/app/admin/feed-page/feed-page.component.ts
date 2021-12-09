@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Post} from "../shared/interfaces";
-import {PostNewPostService} from "../shared/services/post-new-post.service";
+import { Post } from "../../shared/interfaces";
+import { PostNewPostService } from "../shared/services/post-new-post.service";
 
 @Component({
   selector: 'app-feed-page',

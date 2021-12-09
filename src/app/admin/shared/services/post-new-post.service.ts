@@ -1,4 +1,4 @@
-import {Post} from "../interfaces";
+import {Post} from "../../../shared/interfaces";
 
 export class PostNewPostService {
   private _post!: Post

@@ -1,4 +1,19 @@
-mat-card {
-  max-width: 80%;
-  margin: 0 auto;
+:host {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  button {
+    width: 160px;
+    margin: 0 auto;
+  }
 }
+

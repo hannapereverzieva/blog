@@ -2,10 +2,20 @@
   <div>Admin Blog</div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end">
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
-      <li><a [routerLink]="['/admin', 'feed']">Read my posts</a></li>
-      <li><a [routerLink]="['/admin', 'create']">Create Post</a></li>
-      <li><a [routerLink]="['/']">All posts</a></li>
-      <li><a href="#" (click)="logout($event)">Logout</a></li>
+      <li><a routerLinkActive="active" [routerLink]="['/admin', 'feed']">Read my posts</a></li>
+      <li><a routerLinkActive="active" [routerLink]="['/admin', 'create']">Create Post</a></li>
+      <li>
+        <a
+          routerLinkActive="active"
+          [routerLinkActiveOptions]={exact:true}
+          [routerLink]="['/']">All posts</a>
+      </li>
+      <li>
+        <a
+          routerLinkActive="active"
+          [routerLink]="['#']"
+          (click)="logout($event)">Logout</a>
+      </li>
     </ul>
   </div>
 </mat-toolbar>

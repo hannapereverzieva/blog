@@ -30,8 +30,8 @@ import { SharedModule} from "../shared/shared.module";
         ]
       }
     ]),
-    SharedModule,
-    RouterModule
+    SharedModule
+
   ],
   exports: [RouterModule],
   providers: [PostNewPostService]

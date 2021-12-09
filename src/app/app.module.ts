@@ -7,7 +7,6 @@ import { HeaderComponent } from './shared/components/main-layout/header/header.c
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { HomeComponent } from './home/home.component';
 import { PostPageComponent } from './post-page/post-page.component';
-import { PostComponent} from "./shared/components/post/post.component";
 import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
@@ -17,7 +16,7 @@ import { SharedModule } from "./shared/shared.module";
     MainLayoutComponent,
     HomeComponent,
     PostPageComponent,
-    PostComponent
+
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,8 @@ import { SharedModule } from "./shared/shared.module";
     AppRoutingModule
   ],
   exports: [
-    AppComponent
+    AppComponent,
+
   ],
   bootstrap: [AppComponent]
 })

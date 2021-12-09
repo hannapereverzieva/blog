@@ -1,4 +1,4 @@
-import { Post } from "../../admin/shared/interfaces";
+import { Post } from "../interfaces";
 
 export class TransferPostService {
   private _post!: Post
