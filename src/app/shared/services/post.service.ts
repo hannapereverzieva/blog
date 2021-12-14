@@ -1,6 +1,6 @@
 import { Post } from "../interfaces";
 
-export class TransferPostService {
+export class PostService {
   private _post!: Post
 
   set post(selectedPost: Post) {

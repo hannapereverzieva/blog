@@ -2,5 +2,5 @@
      fxLayoutAlign="center center"
      fxLayoutGap="10px"
      class="posts" *ngFor="let post of allPostsFromServer">
-  <app-post [particular_post]="post" [openButtonIsVisible]="true"></app-post>
+  <app-post [post]="post" [openButtonIsVisible]="true"></app-post>
 </div>

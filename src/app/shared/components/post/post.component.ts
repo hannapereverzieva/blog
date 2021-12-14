@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from "../../interfaces";
-import { TransferPostService } from "../../services/transfer-post.service";
+import { PostService } from "../../services/post.service";
 
 @Component({
   selector: 'app-post',
@@ -8,15 +8,15 @@ import { TransferPostService } from "../../services/transfer-post.service";
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @Input() public particular_post!: Post;
+  @Input() public post!: Post;
   @Input() public openButtonIsVisible!: boolean;
-  constructor(private _transferPostService: TransferPostService) { }
+  constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
   }
 
-  saveSelectedPost(selectedPost: Post) {
-    this._transferPostService.post = selectedPost;
+  onOpenPost(selectedPost: Post) {
+    this._postService.post = selectedPost;
   }
 
 }

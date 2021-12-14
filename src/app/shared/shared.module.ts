@@ -8,7 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { TransferPostService } from "./services/transfer-post.service";
+import { PostService } from "./services/post.service";
 import { PostComponent } from "./components/post/post.component";
 import { RouterModule } from "@angular/router";
 
@@ -41,6 +41,6 @@ import { RouterModule } from "@angular/router";
     MatInputModule,
     PostComponent
   ],
-  providers: [ TransferPostService ]
+  providers: [ PostService ]
 })
 export class SharedModule { }

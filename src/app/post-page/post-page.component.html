@@ -1,7 +1,7 @@
 <app-post
   fxLayoutAlign="center center"
   *ngIf="single_post != undefined; else error_message"
-  [particular_post]="single_post"
+  [post]="single_post"
   [openButtonIsVisible]="false"></app-post>
 <ng-template #error_message>
   <p class="error-message">Select a post from a home page!</p>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from "../../shared/interfaces";
-import { PostNewPostService } from "../shared/services/post-new-post.service";
+import { PostService } from "../../shared/services/post.service";
 
 @Component({
   selector: 'app-feed-page',
@@ -16,11 +16,11 @@ export class FeedPageComponent implements OnInit {
       date: new Date()
     }
   ]
-  constructor(private _postNewPostService: PostNewPostService) { }
+  constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
-    if (this._postNewPostService.post != undefined) {
-      this.posts.unshift(this._postNewPostService.post);
+    if (this._postService.post != undefined) {
+      this.posts.unshift(this._postService.post);
     }
   }
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Post } from "../shared/interfaces";
-import { TransferPostService } from "../shared/services/transfer-post.service";
+import { PostService } from "../shared/services/post.service";
 
 @Component({
   selector: 'app-post-page',
@@ -9,10 +9,10 @@ import { TransferPostService } from "../shared/services/transfer-post.service";
 })
 export class PostPageComponent implements OnInit {
   public single_post!: Post;
-  constructor(private _transferPostService: TransferPostService) { }
+  constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
-    this.single_post = this._transferPostService.post;
+    this.single_post = this._postService.post;
   }
 
 }

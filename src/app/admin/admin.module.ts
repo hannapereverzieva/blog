@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { FeedPageComponent } from './feed-page/feed-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
-import { PostNewPostService } from "./shared/services/post-new-post.service";
 import { SharedModule} from "../shared/shared.module";
 
 @NgModule({
@@ -31,10 +30,8 @@ import { SharedModule} from "../shared/shared.module";
       }
     ]),
     SharedModule
-
   ],
-  exports: [RouterModule],
-  providers: [PostNewPostService]
+  exports: [RouterModule]
 })
 export class AdminModule {
 
