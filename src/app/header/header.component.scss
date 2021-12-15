@@ -1,0 +1,19 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.active {
+  opacity: 0.5;
+}
