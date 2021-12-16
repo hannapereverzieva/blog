@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <div>Blog</div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+            <li><a routerLinkActive="active" [routerLinkActiveOptions]={exact:true} [routerLink]="['/']">Home</a></li>
+            <li><a routerLinkActive="active" [routerLink]="['/create']">Create</a></li>
+            <li>
+                <a routerLinkActive="active"
+                   [routerLink]="['/login']"
+                   (click)="onLogin($event)">Login</a>
+            </li>
+            <li>
+                <a routerLinkActive="active"
+                   [routerLink]="['#']"
+                   (click)="onLogout($event)">Logout</a>
+            </li>
+        </ul>
+    </div>
+</mat-toolbar>
