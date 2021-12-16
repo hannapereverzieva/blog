@@ -3,17 +3,17 @@
   fxLayoutAlign="center center"
   fxLayoutGap="10px"
   [formGroup]="loginForm"
-  (ngSubmit)="submit()">
+  (ngSubmit)="onSubmit($event)">
   <h2>Login into Admin Panel</h2>
   <mat-form-field appearance="fill">
     <input
       type="email"
       matInput
       placeholder="your email"
-      formControlName="email">
-    <mat-error *ngIf="email?.touched  " class="validation">
-      <small *ngIf="email?.errors?.['required']">Field email should not be empty</small>
-      <small *ngIf="email?.errors?.['email']">Email should be valid</small>
+      formControlName="emailControl">
+    <mat-error *ngIf="emailControl?.touched  " class="validation">
+      <small *ngIf="emailControl?.errors?.['required']">Field email should not be empty</small>
+      <small *ngIf="emailControl?.errors?.['email']">Email should be valid</small>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
@@ -21,12 +21,12 @@
       type="password"
       matInput
       placeholder="your password"
-      formControlName="password">
-    <mat-error *ngIf="password?.touched && password?.invalid" class="validation">
-      <small *ngIf="password?.errors?.['required']">Field should not be empty</small>
-      <small *ngIf="password?.errors?.['minlength']">
-        Password should be not shorter than {{password?.errors?.['minlength'].requiredLength}} symbols.
-        Now it is {{password?.errors?.['minlength'].actualLength}}
+      formControlName="passwordControl">
+    <mat-error *ngIf="passwordControl?.touched && passwordControl?.invalid" class="validation">
+      <small *ngIf="passwordControl?.errors?.['required']">Field should not be empty</small>
+      <small *ngIf="passwordControl?.errors?.['minlength']">
+        Password should be not shorter than {{passwordControl?.errors?.['minlength'].requiredLength}} symbols.
+        Now it is {{passwordControl?.errors?.['minlength'].actualLength}}
       </small>
     </mat-error>
   </mat-form-field>
@@ -35,5 +35,5 @@
     mat-raised-button
     color="primary"
     [disabled]="loginForm.invalid"
-    [routerLink]="['/']">Login</button>
+    >Login</button>
 </form>

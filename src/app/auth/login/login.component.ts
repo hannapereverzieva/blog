@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from '../models/user';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,13 @@ import { User } from '../models/user';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   user!: User;
-  constructor() {
+  constructor(private _router: Router) {
     this.loginForm = new FormGroup({
-      email : new FormControl('', [
+      emailControl : new FormControl('', [
         Validators.required,
         Validators.email
       ]),
-      password : new FormControl('', [
+      passwordControl : new FormControl('', [
         Validators.required,
         Validators.minLength(8)])
     })
@@ -26,22 +27,24 @@ export class LoginComponent implements OnInit {
 
   }
 
-  get email() {
-    return this.loginForm.get('email')
+  get emailControl() {
+    return this.loginForm.get('emailControl')
   }
 
-  get password() {
-    return this.loginForm.get('password')
+  get passwordControl() {
+    return this.loginForm.get('passwordControl')
   }
 
-  submit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     if (this.loginForm.invalid) {
       return;
     }
+    this._router.navigate(['/']);
 
     this.user = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
+      email: this.loginForm.value.emailControl,
+      password: this.loginForm.value.passwordControl
     }
   }
 

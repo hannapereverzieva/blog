@@ -11,12 +11,12 @@
       id="title"
       type="text"
       matInput
-      formControlName="title">
-    <mat-error *ngIf="title?.touched && title?.invalid " class="validation">
-      <small *ngIf="title?.errors?.['required']">Title should not be empty</small>
-      <small *ngIf="title?.errors?.['maxlength']">
-        Cut the title length. Exceeded: {{title?.errors?.['maxlength'].actualLength -
-        title?.errors?.['maxlength'].requiredLength}} symbols.
+      formControlName="titleControl">
+    <mat-error *ngIf="titleControl?.touched && titleControl?.invalid " class="validation">
+      <small *ngIf="titleControl?.errors?.['required']">Title should not be empty</small>
+      <small *ngIf="titleControl?.errors?.['maxlength']">
+        Cut the title length. Exceeded: {{titleControl?.errors?.['maxlength'].actualLength -
+        titleControl?.errors?.['maxlength'].requiredLength}} symbols.
       </small>
     </mat-error>
   </mat-form-field>
@@ -26,9 +26,9 @@
       id="author"
       type="text"
       matInput
-      formControlName="author">
-    <mat-error *ngIf="author?.touched && author?.invalid " class="validation">
-      <small *ngIf="author?.errors?.['required']">Field Author should not be empty</small>
+      formControlName="authorControl">
+    <mat-error *ngIf="authorControl?.touched && authorControl?.invalid " class="validation">
+      <small *ngIf="authorControl?.errors?.['required']">Field Author should not be empty</small>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
@@ -38,9 +38,9 @@
       id="content"
       type="text"
       matInput
-      formControlName="content"> </textarea>
-    <mat-error *ngIf="content?.touched && content?.invalid " class="validation">
-      <small *ngIf="content?.errors?.['required']">Please share your thoughts:)</small>
+      formControlName="contentControl"> </textarea>
+    <mat-error *ngIf="contentControl?.touched && contentControl?.invalid " class="validation">
+      <small *ngIf="contentControl?.errors?.['required']">Please share your thoughts:)</small>
 
     </mat-error>
   </mat-form-field>

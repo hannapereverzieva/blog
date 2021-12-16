@@ -14,28 +14,28 @@ export class CreatePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.postForm = new FormGroup({
-      title : new FormControl('', [
+      titleControl : new FormControl('', [
         Validators.required,
         Validators.maxLength(25)
       ]),
-      author : new FormControl('', [
+      authorControl : new FormControl('', [
         Validators.required,
       ]),
-      content : new FormControl('', [
+      contentControl : new FormControl('', [
         Validators.required])
     })
   }
 
-  get title() {
-    return this.postForm.get('title')
+  get titleControl() {
+    return this.postForm.get('titleControl')
   }
 
-  get author() {
-    return this.postForm.get('author')
+  get authorControl() {
+    return this.postForm.get('authorControl')
   }
 
-  get content() {
-    return this.postForm.get('content')
+  get contentControl() {
+    return this.postForm.get('contentControl')
   }
 
   submit() {
@@ -44,9 +44,9 @@ export class CreatePageComponent implements OnInit {
     }
 
     const post : Post = {
-      title: this.postForm.value.title,
-      author: this.postForm.value.author,
-      content: this.postForm.value.content,
+      title: this.postForm.value.titleControl,
+      author: this.postForm.value.authorControl,
+      content: this.postForm.value.contentControl,
       date: new Date()
     }
 
