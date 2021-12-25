@@ -1,6 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+const Post = require("./models/post");
 const app = express();
+
+mongoose.connect('mongodb://localhost:27017/databasing', (err)=> {
+    if(!err) {
+        console.log('MongoDB connection succeeded');
+    }
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -18,14 +27,27 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next)=> {
-    const post = req.body;
+    const post = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        author: req.body.author,
+        date: req.body.date
+    })
     console.log(post);
+    post.save();
     res.status(201).json({
         message: 'Post was posted successfully!'
     });
 });
 
 app.get("/api/posts", (req, res,next) => {
+    Post.find()
+        .then(documents => {
+            res.status(200).json({
+                message: "Posts were fetched successfully!",
+                posts: documents
+            });
+        })
     const posts = [
         {
             id: "123",
@@ -50,10 +72,7 @@ app.get("/api/posts", (req, res,next) => {
         }
     ]
 
-    res.status(200).json({
-        message: "Posts were fetched successfully!",
-        posts: posts
-    });
+
 
     app.get("*", (req, res, next) => {
         res.status(404).json({
