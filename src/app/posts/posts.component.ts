@@ -1,45 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from "./models/post";
+import { Subscription } from "rxjs";
+import { PostService } from "./post.service";
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit {
-  public allPostsFromServer : Post[] = [
-    {
-      id: '123',
-      date: new Date(),
-      title: 'Shiba Inu 1',
-      author: 'John Galt',
-      content: `The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with mountainous
-        terrain, the Shiba Inu was originall bred for hunting`
-    },
-    {
-      id: '123',
-      date: new Date(),
-      title: 'Shiba Inu 2',
-      author: 'John Galt',
-      content: `The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with mountainous
-        terrain, the Shiba Inu was originall bred for hunting`
-    },
-    {
-      id: '123',
-      date: new Date(),
-      title: 'Shiba Inu 3',
-      author: 'John Galt',
-      content: `The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with mountainous
-        terrain, the Shiba Inu was originall bred for hunting`
-    }
-  ]
+export class PostsComponent implements OnInit, OnDestroy {
+  posts: Post[] = [];
+  private _postsSub!: Subscription;
 
-  constructor() { }
+  constructor(private _postService: PostService) {
+  }
 
   ngOnInit(): void {
+    this._postService.getPosts();
+    this._postsSub = this._postService.getPostUpdateListener()
+        .subscribe((posts:Post[])=> {
+          this.posts = posts;
+        })
+  }
+
+  ngOnDestroy() {
+    this._postsSub.unsubscribe();
   }
 
 }

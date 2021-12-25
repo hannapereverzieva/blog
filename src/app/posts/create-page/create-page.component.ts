@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Post } from "../models/post";
 import { PostService } from "../post.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-page',
@@ -10,7 +10,7 @@ import { PostService } from "../post.service";
 })
 export class CreatePageComponent implements OnInit {
   postForm!: FormGroup;
-  constructor(private _postService: PostService) { }
+  constructor(private _postService: PostService, private _router: Router) { }
 
   ngOnInit(): void {
     this.postForm = new FormGroup({
@@ -38,21 +38,19 @@ export class CreatePageComponent implements OnInit {
     return this.postForm.get('contentControl')
   }
 
-  submit() {
+  onAddPost() {
     if(this.postForm.invalid) {
       return;
     }
 
-    const post : Post = {
-      title: this.postForm.value.titleControl,
-      author: this.postForm.value.authorControl,
-      content: this.postForm.value.contentControl,
-      date: new Date()
-    }
-
-    this._postService.post = post;
+    this._postService.addPost(
+        this.postForm.value.titleControl,
+        this.postForm.value.authorControl,
+        this.postForm.value.contentControl,
+        new Date())
 
     this.postForm.reset();
+    this._router.navigate(['/']);
   }
 
 }

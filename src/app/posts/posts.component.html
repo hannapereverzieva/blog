@@ -1,6 +1,6 @@
 <div fxLayout="column"
      fxLayoutAlign="center center"
      fxLayoutGap="10px"
-     class="posts" *ngFor="let post of allPostsFromServer">
+     class="posts" *ngFor="let post of posts">
   <app-post [post]="post" [openButtonIsVisible]="true"></app-post>
 </div>
