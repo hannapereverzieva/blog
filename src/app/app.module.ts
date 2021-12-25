@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostPageComponent } from './posts/post-page/post-page.component';
-import { PostService } from "./posts/post.service";
 import { PostComponent } from "./posts/post/post.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -18,6 +17,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { CreatePageComponent } from "./posts/create-page/create-page.component";
 import { LoginComponent } from "./auth/login/login.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -42,12 +42,12 @@ import { LoginComponent } from "./auth/login/login.component";
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   exports: [
     AppComponent,
   ],
-  providers: [ PostService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
