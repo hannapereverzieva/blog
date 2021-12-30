@@ -76,10 +76,13 @@ app.get("/api/posts", (req, res,next) => {
     Post.find()
         .sort({"date": -1})
         .then(documents => {
-            res.status(200).json({
-                message: "Posts were fetched successfully!",
-                posts: documents
-            });
+            setTimeout(() => {
+                res.status(200).json({
+                    message: "Posts were fetched successfully!",
+                    posts: documents
+                });
+            }, 2000);
+
         })
 });
 
