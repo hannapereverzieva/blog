@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require('cors')
 
 const Post = require("./models/post");
 const app = express();
+app.use(cors());
 
 mongoose.connect('mongodb://localhost:27017/databasing', (err)=> {
     if(!err) {
@@ -13,18 +15,6 @@ mongoose.connect('mongodb://localhost:27017/databasing', (err)=> {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, POST, PATCH, DELETE, OPTIONS"
-    );
-    next();
-});
 
 //mocked data
 const posts = [
@@ -58,6 +48,7 @@ app.post("/api/posts", (req, res, next)=> {
         author: req.body.author,
         date: req.body.date
     })
+    console.log(post);
     post.save();
     res.status(201).json({
         message: 'Post was posted successfully!'
@@ -82,7 +73,6 @@ app.get("/api/posts", (req, res,next) => {
                     posts: documents
                 });
             }, 2000);
-
         })
 });
 
