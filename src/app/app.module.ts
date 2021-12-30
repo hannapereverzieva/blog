@@ -21,6 +21,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LoadingService } from "./shared/services/loading.service";
 import { NetworkInterceptor } from "./network.interceptor";
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NetworkInterceptor } from "./network.interceptor";
     PostPageComponent,
     PostComponent,
     CreatePageComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent
 
   ],
   imports: [
