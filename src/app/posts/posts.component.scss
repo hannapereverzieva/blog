@@ -1,7 +1,8 @@
 :host {
-
   .posts {
     margin: 10px;
+    display: flex;
+    flex-direction: column;
   }
 
   mat-progress-spinner {
@@ -10,5 +11,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
+  }
+
+  mat-drawer {
+    width: 300px;
+    padding: 10px;
   }
 }

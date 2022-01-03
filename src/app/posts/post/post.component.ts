@@ -10,6 +10,7 @@ import { PostService } from "../post.service";
 export class PostComponent implements OnInit {
   @Input() public post!: Post;
   @Input() public openButtonIsVisible!: boolean;
+  currentUserLiked = true;
   constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
@@ -17,6 +18,10 @@ export class PostComponent implements OnInit {
 
   onOpenPost(selectedPost: Post) {
     this._postService.post = selectedPost;
+  }
+
+  onToggleLike() {
+    this.currentUserLiked = !this.currentUserLiked;
   }
 
 }

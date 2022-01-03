@@ -17,7 +17,11 @@
   <mat-card-actions
     fxLayout="row"
     fxLayoutAlign="space-between">
-    <button mat-raised-button>LIKE</button>
+      <span class="like-button"
+        [ngStyle]="{backgroundImage: currentUserLiked ?
+          'url(\'../../../assets/images/heart-filled.svg\')' :
+          'url(\'../../../assets/images/heart-outline.svg\')'}"
+        (click)="onToggleLike()"></span>
     <button mat-raised-button>SHARE</button>
     <button
       mat-raised-button

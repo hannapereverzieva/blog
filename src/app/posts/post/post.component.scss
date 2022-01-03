@@ -6,3 +6,13 @@
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+
+.like-button {
+  background-size: cover;
+  width: 34px;
+  cursor: pointer;
+
+    &:hover {
+      opacity: 60%;
+    }
+}

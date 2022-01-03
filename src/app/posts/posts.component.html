@@ -1,7 +1,19 @@
 <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
-<div fxLayout="column"
-     fxLayoutAlign="center center"
-     fxLayoutGap="10px"
-     class="posts" *ngFor="let post of posts">
-  <app-post [post]="post" [openButtonIsVisible]="true"></app-post>
-</div>
+
+<mat-drawer-container>
+    <mat-drawer-content>
+        <div class="posts" *ngFor="let post of posts">
+            <app-post [post]="post" [openButtonIsVisible]="true"></app-post>
+        </div>
+    </mat-drawer-content>
+
+    <mat-drawer mode="side" opened position="end">
+        <h2>Popular Tags:</h2>
+        <mat-divider></mat-divider>
+    </mat-drawer>
+
+</mat-drawer-container>
+
+
+
+

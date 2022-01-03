@@ -22,6 +22,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LoadingService } from "./shared/services/loading.service";
 import { NetworkInterceptor } from "./network.interceptor";
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { MatDividerModule } from "@angular/material/divider";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -32,8 +34,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
     PostComponent,
     CreatePageComponent,
     LoginComponent,
-    NotFoundComponent
-
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,9 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    MatDividerModule,
+    HttpClientModule,
+    MatSidenavModule
   ],
   exports: [
     AppComponent,

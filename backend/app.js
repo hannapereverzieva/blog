@@ -46,7 +46,8 @@ app.post("/api/posts", (req, res, next)=> {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author,
-        date: req.body.date
+        date: req.body.date,
+        likes: req.body.likes
     })
     console.log(post);
     post.save();
@@ -67,12 +68,10 @@ app.get("/api/posts", (req, res,next) => {
     Post.find()
         .sort({"date": -1})
         .then(documents => {
-            setTimeout(() => {
-                res.status(200).json({
-                    message: "Posts were fetched successfully!",
-                    posts: documents
-                });
-            }, 2000);
+            res.status(200).json({
+                message: "Posts were fetched successfully!",
+                posts: documents
+            });
         })
 });
 
