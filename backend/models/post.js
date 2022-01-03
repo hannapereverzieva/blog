@@ -6,7 +6,7 @@ const postSchema = mongoose.Schema({
     author: { type: String, required: true},
     // author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     date: {type: Date, required: true},
-    likes: {type: Number},
+    likes: {type: [String]},
     comments: {type: [String]}
 })
 

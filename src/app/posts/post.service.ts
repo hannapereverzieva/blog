@@ -38,7 +38,7 @@ export class PostService {
   }
 
   addPost(title: string, author: string, content: string, date: Date) {
-    const post : Post = { title: title, author: author, content: content, date: date, id: 'null'};
+    const post : Post = { title: title, author: author, content: content, date: date, id: 'null', likes: []};
     this._httpClient.post<{message: string}>(`${this._baseUrl}/api/posts`, post)
         .subscribe(response => {
           console.log(response.message);
