@@ -50,9 +50,11 @@ app.post('/api/posts', (req, res, next) => {
     likes: req.body.likes,
   });
   console.log(post);
-  post.save();
-  res.status(201).json({
-    message: 'Post was posted successfully!',
+  post.save().then((addedPost) => {
+    res.status(201).json({
+      message: 'Post was posted successfully!',
+      postId: addedPost._id,
+    });
   });
 });
 
@@ -69,6 +71,12 @@ app.get('/api/posts', (req, res, next) => {
         posts: documents,
       });
     });
+});
+
+app.delete('/api/posts/:id', (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id }).then((result) => {
+    res.status(200).json({ message: 'post deleted' });
+  });
 });
 
 app.use('*', (req, res, next) => {

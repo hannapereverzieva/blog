@@ -22,4 +22,8 @@ export class PostComponent implements OnInit {
   onToggleLike() {
     this.currentUserLiked = !this.currentUserLiked;
   }
+
+  onDeletePost(id: any) {
+    this._postService.deletePost(id);
+  }
 }

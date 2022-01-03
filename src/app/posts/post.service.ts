@@ -40,10 +40,21 @@ export class PostService {
   }
 
   addPost(title: string, author: string, content: string, date: Date) {
-    const post: Post = { title: title, author: author, content: content, date: date, id: 'null', likes: [] };
-    this._httpClient.post<{ message: string }>(`${this._baseUrl}/api/posts`, post).subscribe((response) => {
-      console.log(response.message);
-      this._posts.push(post);
+    const post: Post = { title: title, author: author, content: content, date: date, id: '', likes: [] };
+    this._httpClient
+      .post<{ message: string; postId: string }>(`${this._baseUrl}/api/posts`, post)
+      .subscribe((response) => {
+        const id = response.postId;
+        post.id = id;
+        this._posts.push(post);
+        this._postsUpdated.next([...this._posts]);
+      });
+  }
+
+  deletePost(postId: string) {
+    this._httpClient.delete(`${this._baseUrl}/api/posts/${postId}`).subscribe(() => {
+      const updatedPosts = this._posts.filter((post) => post.id !== postId);
+      this._posts = updatedPosts;
       this._postsUpdated.next([...this._posts]);
     });
   }
