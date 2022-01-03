@@ -7,12 +7,22 @@
   background-size: cover;
 }
 
-.like-button {
-  background-size: cover;
-  width: 34px;
-  cursor: pointer;
+.like-button-wrapper {
+  display: flex;
+  align-items: center;
+
+  span.like-button-image {
+    background-size: cover;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transform: scale(0.8);
+    align-self: center;
 
     &:hover {
       opacity: 60%;
     }
+  }
 }
+
+

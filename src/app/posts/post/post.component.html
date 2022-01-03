@@ -17,11 +17,12 @@
   <mat-card-actions
     fxLayout="row"
     fxLayoutAlign="space-between">
-      <span class="like-button"
-        [ngStyle]="{backgroundImage: currentUserLiked ?
-          'url(\'../../../assets/images/heart-filled.svg\')' :
-          'url(\'../../../assets/images/heart-outline.svg\')'}"
-        (click)="onToggleLike()"></span>
+    <div class="like-button-wrapper">
+      <span class="like-button-image"
+            [ngStyle]="{backgroundImage: currentUserLiked ? 'url(\'../../../assets/images/heart-filled.svg\')' : 'url(\'../../../assets/images/heart-outline.svg\')'}" (click)="onToggleLike()"></span>
+      <span>{{post.likes?.length || 0}}</span>
+    </div>
+
     <button mat-raised-button>SHARE</button>
     <button
       mat-raised-button
