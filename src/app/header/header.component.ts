@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogin(event: Event) {
-    console.log('login');
   }
 
   onLogout(event: Event) {

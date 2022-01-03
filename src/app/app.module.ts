@@ -17,7 +17,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { CreatePageComponent } from "./posts/create-page/create-page.component";
 import { LoginComponent } from "./auth/login/login.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { LoadingService } from "./shared/services/loading.service";
+import { NetworkInterceptor } from "./network.interceptor";
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { HttpClientModule } from "@angular/common/http";
     PostPageComponent,
     PostComponent,
     CreatePageComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent
 
   ],
   imports: [
@@ -43,10 +48,19 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     HttpClientModule
   ],
   exports: [
     AppComponent,
+  ],
+  providers: [
+      LoadingService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: NetworkInterceptor,
+        multi: true
+      }
   ],
   bootstrap: [ AppComponent ]
 })

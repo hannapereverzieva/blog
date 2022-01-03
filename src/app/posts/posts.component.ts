@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from "./models/post";
 import { Subscription } from "rxjs";
 import { PostService } from "./post.service";
+import { LoadingService } from "../shared/services/loading.service";
 
 @Component({
   selector: 'app-posts',
@@ -9,10 +10,12 @@ import { PostService } from "./post.service";
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit, OnDestroy {
+  loading$ = this._loader.loading$;
   posts: Post[] = [];
   private _postsSub!: Subscription;
 
-  constructor(private _postService: PostService) {
+  constructor(private _postService: PostService,
+              private _loader: LoadingService) {
   }
 
   ngOnInit(): void {
