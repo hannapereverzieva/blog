@@ -1,33 +1,41 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{post.title}}</mat-card-title>
+    <mat-card-title>{{ post.title }}</mat-card-title>
     <mat-card-subtitle>
-      <span>By: {{post.author}}</span>
-      <br>
-      <span>{{post.date | date}}</span>
+      <span>By: {{ post.author }}</span>
+      <br />
+      <span>{{ post.date | date }}</span>
     </mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
   <mat-card-content>
     <p>
-      {{post.content}}
+      {{ post.content }}
     </p>
   </mat-card-content>
-  <mat-card-actions
-    fxLayout="row"
-    fxLayoutAlign="space-between">
+  <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
     <div class="like-button-wrapper">
-      <span class="like-button-image"
-            [ngStyle]="{backgroundImage: currentUserLiked ? 'url(\'../../../assets/images/heart-filled.svg\')' : 'url(\'../../../assets/images/heart-outline.svg\')'}" (click)="onToggleLike()"></span>
-      <span>{{post.likes?.length || 0}}</span>
+      <span
+        class="like-button-image"
+        [ngStyle]="{
+          backgroundImage: currentUserLiked
+            ? 'url(\'../../../assets/images/heart-filled.svg\')'
+            : 'url(\'../../../assets/images/heart-outline.svg\')'
+        }"
+        (click)="onToggleLike()"
+      ></span>
+      <span>{{ post.likes?.length || 0 }}</span>
     </div>
 
     <button mat-raised-button>SHARE</button>
     <button
       mat-raised-button
-      [ngStyle]="{'display': openButtonIsVisible? 'block': 'none'}"
+      [ngStyle]="{ display: openButtonIsVisible ? 'block' : 'none' }"
       (click)="onOpenPost(post)"
-      [routerLink]="['/post', post.id]">OPEN</button>
+      [routerLink]="['/post', post.id]"
+    >
+      OPEN
+    </button>
   </mat-card-actions>
 </mat-card>
