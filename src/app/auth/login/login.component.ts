@@ -1,38 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/user';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   user!: User;
   constructor(private _router: Router) {
     this.loginForm = new FormGroup({
-      emailControl : new FormControl('', [
-        Validators.required,
-        Validators.email
-      ]),
-      passwordControl : new FormControl('', [
-        Validators.required,
-        Validators.minLength(8)])
-    })
+      emailControl: new FormControl('', [Validators.required, Validators.email]),
+      passwordControl: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   get emailControl() {
-    return this.loginForm.get('emailControl')
+    return this.loginForm.get('emailControl');
   }
 
   get passwordControl() {
-    return this.loginForm.get('passwordControl')
+    return this.loginForm.get('passwordControl');
   }
 
   onSubmit(event: Event) {
@@ -44,8 +37,7 @@ export class LoginComponent implements OnInit {
 
     this.user = {
       email: this.loginForm.value.emailControl,
-      password: this.loginForm.value.passwordControl
-    }
+      password: this.loginForm.value.passwordControl,
+    };
   }
-
 }

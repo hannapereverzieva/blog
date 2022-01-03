@@ -3,37 +3,25 @@
   fxLayoutAlign="center center"
   fxLayoutGap="10px"
   [formGroup]="loginForm"
-  (ngSubmit)="onSubmit($event)">
+  (ngSubmit)="onSubmit($event)"
+>
   <h2>Login into Admin Panel</h2>
   <mat-form-field appearance="fill">
-    <input
-      type="email"
-      matInput
-      placeholder="your email"
-      formControlName="emailControl">
-    <mat-error *ngIf="emailControl?.touched  " class="validation">
+    <input type="email" matInput placeholder="your email" formControlName="emailControl" />
+    <mat-error *ngIf="emailControl?.touched" class="validation">
       <small *ngIf="emailControl?.errors?.['required']">Field email should not be empty</small>
       <small *ngIf="emailControl?.errors?.['email']">Email should be valid</small>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <input
-      type="password"
-      matInput
-      placeholder="your password"
-      formControlName="passwordControl">
+    <input type="password" matInput placeholder="your password" formControlName="passwordControl" />
     <mat-error *ngIf="passwordControl?.touched && passwordControl?.invalid" class="validation">
       <small *ngIf="passwordControl?.errors?.['required']">Field should not be empty</small>
       <small *ngIf="passwordControl?.errors?.['minlength']">
-        Password should be not shorter than {{passwordControl?.errors?.['minlength'].requiredLength}} symbols.
-        Now it is {{passwordControl?.errors?.['minlength'].actualLength}}
+        Password should be not shorter than {{passwordControl?.errors?.['minlength'].requiredLength}} symbols. Now it is
+        {{passwordControl?.errors?.['minlength'].actualLength}}
       </small>
     </mat-error>
   </mat-form-field>
-  <button
-    type="submit"
-    mat-raised-button
-    color="primary"
-    [disabled]="loginForm.invalid"
-    >Login</button>
+  <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
 </form>
