@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  constructor(private _router: Router) {}
 
-  constructor(private _router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  onLogin(event: Event) {
-  }
+  onLogin(event: Event) {}
 
   onLogout(event: Event) {
     event.preventDefault();
     this._router.navigate(['/login']);
   }
-
 }

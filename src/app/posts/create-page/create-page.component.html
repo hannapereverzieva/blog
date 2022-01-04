@@ -1,52 +1,38 @@
-<form
+<mat-progress-spinner [mode]="'indeterminate'" *ngIf="isLoading"></mat-progress-spinner>
+<form *ngIf="!isLoading"
   [formGroup]="postForm"
   fxLayout="column"
   fxLayoutAlign="center center"
   fxLayoutGap="10px"
-  (ngSubmit)="onAddPost()">
+  (ngSubmit)="onSavePost()"
+>
   <h2>New post creation</h2>
   <mat-form-field appearance="fill">
     <label for="title">Title:</label>
-    <input
-      id="title"
-      type="text"
-      matInput
-      formControlName="titleControl">
-    <mat-error *ngIf="titleControl?.touched && titleControl?.invalid " class="validation">
+    <input id="title" type="text" matInput formControlName="titleControl" />
+    <mat-error *ngIf="titleControl?.touched && titleControl?.invalid" class="validation">
       <small *ngIf="titleControl?.errors?.['required']">Title should not be empty</small>
       <small *ngIf="titleControl?.errors?.['maxlength']">
-        Cut the title length. Exceeded: {{titleControl?.errors?.['maxlength'].actualLength -
-        titleControl?.errors?.['maxlength'].requiredLength}} symbols.
+        Cut the title length. Exceeded:
+        {{titleControl?.errors?.['maxlength'].actualLength -
+        titleControl?.errors?.['maxlength'].requiredLength}}
+        symbols.
       </small>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <label for="author">Author:</label>
-    <input
-      id="author"
-      type="text"
-      matInput
-      formControlName="authorControl">
-    <mat-error *ngIf="authorControl?.touched && authorControl?.invalid " class="validation">
+    <input id="author" type="text" matInput formControlName="authorControl" />
+    <mat-error *ngIf="authorControl?.touched && authorControl?.invalid" class="validation">
       <small *ngIf="authorControl?.errors?.['required']">Field Author should not be empty</small>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <label for="author">Content:</label>
-    <textarea
-      cdkTextareaAutosize
-      id="content"
-      type="text"
-      matInput
-      formControlName="contentControl"> </textarea>
-    <mat-error *ngIf="contentControl?.touched && contentControl?.invalid " class="validation">
+    <textarea cdkTextareaAutosize id="content" type="text" matInput formControlName="contentControl"> </textarea>
+    <mat-error *ngIf="contentControl?.touched && contentControl?.invalid" class="validation">
       <small *ngIf="contentControl?.errors?.['required']">Please share your thoughts:)</small>
-
     </mat-error>
   </mat-form-field>
-  <button
-    type="submit"
-    mat-raised-button
-    color="primary"
-    [disabled]="postForm.invalid">Save post</button>
+  <button type="submit" mat-raised-button color="primary" [disabled]="postForm.invalid">Save post</button>
 </form>
