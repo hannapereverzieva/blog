@@ -31,10 +31,12 @@
     <button
       mat-raised-button
       [ngStyle]="{ display: openButtonIsVisible ? 'block' : 'none' }"
-      (click)="onOpenPost(post)"
       [routerLink]="['/post', post.id]"
     >
       OPEN
+    </button>
+    <button mat-icon-button color="primary" aria-label="edit" [routerLink]="['/edit', post.id]" >
+      <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button color="warn" aria-label="delete" (click)="onDeletePost(post.id)">
       <mat-icon>delete</mat-icon>

@@ -15,10 +15,6 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onOpenPost(selectedPost: Post) {
-    this._postService.post = selectedPost;
-  }
-
   onToggleLike() {
     this.currentUserLiked = !this.currentUserLiked;
   }

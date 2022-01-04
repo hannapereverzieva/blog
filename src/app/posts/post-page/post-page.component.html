@@ -1,7 +1,7 @@
 <app-post
   fxLayoutAlign="center center"
-  *ngIf="single_post != undefined; else error_message"
-  [post]="single_post"
+  *ngIf="post != undefined; else error_message"
+  [post]="post"
   [openButtonIsVisible]="false"
 ></app-post>
 <ng-template #error_message>

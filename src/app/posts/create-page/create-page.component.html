@@ -1,9 +1,10 @@
-<form
+<mat-progress-spinner [mode]="'indeterminate'" *ngIf="isLoading"></mat-progress-spinner>
+<form *ngIf="!isLoading"
   [formGroup]="postForm"
   fxLayout="column"
   fxLayoutAlign="center center"
   fxLayoutGap="10px"
-  (ngSubmit)="onAddPost()"
+  (ngSubmit)="onSavePost()"
 >
   <h2>New post creation</h2>
   <mat-form-field appearance="fill">

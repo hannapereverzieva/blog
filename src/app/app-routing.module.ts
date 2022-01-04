@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'post/:id', component: PostPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'create', component: CreatePageComponent },
+  { path: 'edit/:id', component: CreatePageComponent},
   { path: '**', component: NotFoundComponent },
 ];
 
