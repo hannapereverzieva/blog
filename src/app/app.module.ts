@@ -8,22 +8,14 @@ import { PostsComponent } from './posts/posts.component';
 import { PostPageComponent } from './posts/post-page/post-page.component';
 import { PostComponent } from './posts/post/post.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { CreatePageComponent } from './posts/create-page/create-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingService } from './shared/services/loading.service';
-import { NetworkInterceptor } from './network.interceptor';
+import { SpinnerInterceptor } from './spinner.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { AngularMaterialModule } from "./angular-material.module";
 
 @NgModule({
   declarations: [
@@ -41,25 +33,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     BrowserAnimationsModule,
     AppRoutingModule,
     FlexLayoutModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatDividerModule,
     HttpClientModule,
-    MatSidenavModule,
+    AngularMaterialModule
   ],
   exports: [AppComponent],
   providers: [
     LoadingService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: NetworkInterceptor,
+      useClass: SpinnerInterceptor,
       multi: true,
     },
   ],

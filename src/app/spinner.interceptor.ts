@@ -5,7 +5,7 @@ import { LoadingService } from './shared/services/loading.service';
 import { finalize } from 'rxjs';
 
 @Injectable()
-export class NetworkInterceptor implements HttpInterceptor {
+export class SpinnerInterceptor implements HttpInterceptor {
   constructor(private _loader: LoadingService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
