@@ -49,16 +49,26 @@ router.post('', multer({storage: storage}).single('image'),(req, res, next) => {
 });
 
 router.get('', (req, res, next) => {
-    //aggregate practice
-    Post.aggregate([{ $limit: 25 }, { $match: { author: 'Hanna' } }]);
-
-    //sort practice
-    Post.find()
+    const pageSize = +req.query.pagesize;
+    const currentPage = req.query.page;
+    const postQuery = Post.find();
+    let fetchedPosts;
+    if (pageSize && currentPage) {
+        postQuery
+            .skip(pageSize * (currentPage - 1))
+            .limit(pageSize);
+    }
+    postQuery
         .sort({ date: -1 })
-        .then((documents) => {
+        .then(documents => {
+            fetchedPosts = documents;
+            return Post.count();
+        })
+        .then(count => {
             res.status(200).json({
                 message: 'Posts were fetched successfully!',
-                posts: documents,
+                posts: fetchedPosts,
+                maxPosts: count
             });
         });
 });

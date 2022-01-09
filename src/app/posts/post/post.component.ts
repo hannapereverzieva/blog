@@ -10,6 +10,8 @@ import { PostService } from '../post.service';
 export class PostComponent implements OnInit {
   @Input() public post!: Post;
   @Input() public openButtonIsVisible!: boolean;
+  @Input() private _postsPerPage!: number;
+  @Input() private _pageSizeOptions!: number;
   currentUserLiked = true;
   constructor(private _postService: PostService) {}
 
@@ -20,6 +22,8 @@ export class PostComponent implements OnInit {
   }
 
   onDeletePost(id: any) {
-    this._postService.deletePost(id);
+    this._postService.deletePost(id).subscribe(() => {
+      this._postService.getPosts(this._postsPerPage, this._pageSizeOptions);
+    })
   }
 }

@@ -9,31 +9,35 @@ import { Router } from "@angular/router";
 export class PostService {
   private _post!: Post;
   private _posts: Post[] = [];
-  private _postsUpdated = new Subject<Post[]>();
+  private _postsUpdated = new Subject<{posts: Post[], postsCount: number}>();
   private _baseUrl: string = 'http://localhost:3000';
 
   constructor(private _httpClient: HttpClient, private _router: Router) {}
 
-  getPosts() {
+  getPosts(postsPerPage: number, currentPage: number) {
+      const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     this._httpClient
-      .get<{ message: string; posts: any }>(`${this._baseUrl}/api/posts`)
+      .get<{ message: string; posts: any; maxPosts: number }>(`${this._baseUrl}/api/posts${queryParams}`)
       .pipe(
         map((postData) => {
-          return postData.posts.map((post: any) => {
-            return {
-              title: post.title,
-              content: post.content,
-              author: post.author,
-              date: post.date,
-              id: post._id,
-                imagePath: post.imagePath
-            };
-          });
+          return {
+              posts: postData.posts.map((post: any) => {
+                  return {
+                      title: post.title,
+                      content: post.content,
+                      author: post.author,
+                      date: post.date,
+                      id: post._id,
+                      imagePath: post.imagePath
+                  };
+              }),
+              maxPosts: postData.maxPosts
+          }
         }),
       )
-      .subscribe((mappedPosts) => {
-        this._posts = mappedPosts;
-        this._postsUpdated.next([...this._posts]);
+      .subscribe((mappedPostsData) => {
+        this._posts = mappedPostsData.posts;
+        this._postsUpdated.next({posts: [...this._posts], postsCount: mappedPostsData.maxPosts});
       });
   }
 
@@ -54,17 +58,6 @@ export class PostService {
     this._httpClient
       .post<{ message: string; post: Post }>(`${this._baseUrl}/api/posts`, postData)
       .subscribe((response) => {
-          const post: Post = {
-              id: response.post.id,
-              title: title,
-              author: author,
-              content: content,
-              date: date,
-              likes: [],
-              imagePath: response.post.imagePath
-          }
-        this._posts.push(post);
-        this._postsUpdated.next([...this._posts]);
         this._router.navigate(["/"]);
       });
   }
@@ -92,28 +85,11 @@ export class PostService {
 
     this._httpClient.put(`${this._baseUrl}/api/posts/${id}`, postData)
         .subscribe(responseData => {
-          const updatedPosts = [...this._posts];
-          const oldPostIndex = updatedPosts.findIndex(p => p.id === id );
-          const post: Post = {
-              title: title,
-              author: author,
-              content: content,
-              date: date,
-              id: id,
-              likes: [],
-              imagePath: '' };
-          updatedPosts[oldPostIndex] = post;
-          this._posts = updatedPosts;
-          this._postsUpdated.next([...this._posts]);
           this._router.navigate(["/"]);
         })
   }
 
   deletePost(postId: string) {
-    this._httpClient.delete(`${this._baseUrl}/api/posts/${postId}`).subscribe(() => {
-      const updatedPosts = this._posts.filter((post) => post.id !== postId);
-      this._posts = updatedPosts;
-      this._postsUpdated.next([...this._posts]);
-    });
+    return this._httpClient.delete(`${this._baseUrl}/api/posts/${postId}`);
   }
 }
