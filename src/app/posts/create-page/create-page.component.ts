@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../post.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Post } from "../models/post";
+import { fileType } from './file-type.validator';
 
 @Component({
   selector: 'app-create-page',
@@ -12,6 +13,7 @@ import { Post } from "../models/post";
 export class CreatePageComponent implements OnInit {
   postForm!: FormGroup;
   isLoading = false;
+  imagePreview!: string;
   private _mode = 'create';
   private _postId!: any;
   private _post! : any;
@@ -22,6 +24,7 @@ export class CreatePageComponent implements OnInit {
       titleControl: new FormControl('', [Validators.required, Validators.maxLength(25)]),
       authorControl: new FormControl('', [Validators.required]),
       contentControl: new FormControl('', [Validators.required]),
+      imageControl: new FormControl(null, {validators: [Validators.required], asyncValidators: [fileType]})
     });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -33,11 +36,12 @@ export class CreatePageComponent implements OnInit {
             this._postService.getPost(this._postId).subscribe(postData => {
               this.isLoading = false;
               if(postData) {
-                this._post = {id: postData._id, title: postData.title, author: postData.author, content: postData.content }
+                this._post = {id: postData._id, title: postData.title, author: postData.author, content: postData.content, imagePath: postData.imagePath }
                 this.postForm.patchValue({
                   titleControl: this._post.title,
                   authorControl: this._post.author,
-                  contentControl: this._post.content
+                  contentControl: this._post.content,
+                  imageControl: this._post.imagePath
                 })
               }
             });
@@ -63,6 +67,22 @@ export class CreatePageComponent implements OnInit {
     return this.postForm.get('contentControl');
   }
 
+  get imageControl() {
+    return this.postForm.get('imageControl');
+  }
+
+  onImagePicked(event: Event) {
+    // @ts-ignore
+    const file = (event.target as HTMLInputElement).files[0];
+    this.postForm.patchValue({imageControl: file});
+    this.imageControl?.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = <string>reader.result;
+    }
+    reader.readAsDataURL(file);
+  }
+
   onSavePost() {
     if (this.postForm.invalid) {
       return;
@@ -76,12 +96,14 @@ export class CreatePageComponent implements OnInit {
           this.postForm.value.authorControl,
           this.postForm.value.contentControl,
           new Date(),
+          this.postForm.value.imageControl
       );
     } else {
       this._postService.updatePost(this.postForm.value.titleControl,
           this.postForm.value.authorControl,
           this.postForm.value.contentControl,
-          new Date(), this._postId);
+          new Date(), this._postId,
+          this.postForm.value.image);
     }
 
 

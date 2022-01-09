@@ -19,7 +19,17 @@
         symbols.
       </small>
     </mat-error>
+
   </mat-form-field>
+  <div>
+    <button mat-stroked-button type="button" (click)="filePicker.click()">
+      Upload Image
+    </button>
+    <input mat-input type="file" #filePicker (change)="onImagePicked($event)">
+  </div>
+  <div class="image-preview" *ngIf="imagePreview!=='' && imagePreview && imageControl?.valid">
+    <img [src]="imagePreview" [alt]="postForm.value.title">
+  </div>
   <mat-form-field appearance="fill">
     <label for="author">Author:</label>
     <input id="author" type="text" matInput formControlName="authorControl" />

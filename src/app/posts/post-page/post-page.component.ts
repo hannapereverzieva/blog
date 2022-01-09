@@ -24,7 +24,9 @@ export class PostPageComponent implements OnInit {
             author: postData.author,
             content: postData.content,
             date: postData.date,
-            likes: []
+            likes: [],
+            imagePath: ''
+
           }
         }
       });

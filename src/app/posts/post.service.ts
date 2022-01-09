@@ -26,6 +26,7 @@ export class PostService {
               author: post.author,
               date: post.date,
               id: post._id,
+                imagePath: post.imagePath
             };
           });
         }),
@@ -40,30 +41,67 @@ export class PostService {
     return this._postsUpdated.asObservable();
   }
 
-  getPost(id: string): Observable<{_id: string, title: string, author: string, content: string, date: Date}> {
-    return this._httpClient.get<{_id: string, title: string, author: string, content: string, date: Date}>(`${this._baseUrl}/api/posts/${id}`);
+  getPost(id: string): Observable<{_id: string, title: string, author: string, content: string, date: Date, imagePath: string}> {
+    return this._httpClient.get<{_id: string, title: string, author: string, content: string, date: Date, imagePath: string}>(`${this._baseUrl}/api/posts/${id}`);
   }
 
-
-  addPost(title: string, author: string, content: string, date: Date) {
-    const post: Post = { title: title, author: author, content: content, date: date, id: '', likes: [] };
+  addPost(title: string, author: string, content: string, date: Date, image: File) {
+      const postData = new FormData();
+      postData.append('title', title);
+      postData.append('author', author);
+      postData.append('content', content);
+      postData.append('image', image, title);
     this._httpClient
-      .post<{ message: string; postId: string }>(`${this._baseUrl}/api/posts`, post)
+      .post<{ message: string; post: Post }>(`${this._baseUrl}/api/posts`, postData)
       .subscribe((response) => {
-        const id = response.postId;
-        post.id = id;
+          const post: Post = {
+              id: response.post.id,
+              title: title,
+              author: author,
+              content: content,
+              date: date,
+              likes: [],
+              imagePath: response.post.imagePath
+          }
         this._posts.push(post);
         this._postsUpdated.next([...this._posts]);
         this._router.navigate(["/"]);
       });
   }
 
-  updatePost(title: string, author: string, content: string, date: Date, id: string) {
-    const post : Post = { title: title, author: author, content: content, date: date, id: id, likes: [] };
-    this._httpClient.put(`${this._baseUrl}/api/posts/${id}`, post)
+  updatePost(title: string, author: string, content: string, date: Date, id: string, image: File | string) {
+      let postData: Post | FormData;
+      if (typeof(image) === 'object') {
+          postData = new FormData();
+          postData.append('id', id);
+          postData.append('title', title);
+          postData.append('author', author);
+          postData.append('content', content);
+          postData.append('image', image, title);
+      } else {
+          postData = {
+              title: title,
+              author: author,
+              content: content,
+              date: date,
+              id: id,
+              likes: [],
+              imagePath: image
+          };
+      }
+
+    this._httpClient.put(`${this._baseUrl}/api/posts/${id}`, postData)
         .subscribe(responseData => {
           const updatedPosts = [...this._posts];
-          const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id );
+          const oldPostIndex = updatedPosts.findIndex(p => p.id === id );
+          const post: Post = {
+              title: title,
+              author: author,
+              content: content,
+              date: date,
+              id: id,
+              likes: [],
+              imagePath: '' };
           updatedPosts[oldPostIndex] = post;
           this._posts = updatedPosts;
           this._postsUpdated.next([...this._posts]);
