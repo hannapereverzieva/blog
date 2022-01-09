@@ -5,4 +5,5 @@ export interface Post {
   author: string;
   content: string;
   likes: string[];
+  imagePath: string;
 }
