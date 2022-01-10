@@ -44,5 +44,17 @@
       <small *ngIf="contentControl?.errors?.['required']">Please share your thoughts:)</small>
     </mat-error>
   </mat-form-field>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-chip-list #taglist>
+        <mat-chip selected color="accent" *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="onRemoveTag(tag)">
+          {{tag}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      <input type="text" matInput placeholder="Add Tags" [matChipInputFor]="taglist" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="onAddTag($event)">
+    </mat-form-field>
+  </div>
   <button type="submit" mat-raised-button color="primary" [disabled]="postForm.invalid">Save post</button>
 </form>

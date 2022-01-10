@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const Post = require("../models/post");
+const Tag = require("../models/tag");
 
 const router = express.Router();
 
@@ -32,9 +33,11 @@ router.post('', multer({storage: storage}).single('image'),(req, res, next) => {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author,
+        creator: 'userId',
         date: req.body.date,
         likes: req.body.likes,
-        imagePath: url + "/images/" + req.file.filename
+        imagePath: url + "/images/" + req.file.filename,
+        tags: req.body.tags
     });
     console.log(post);
     post.save().then((addedPost) => {
@@ -46,6 +49,21 @@ router.post('', multer({storage: storage}).single('image'),(req, res, next) => {
             }
         });
     });
+
+    const tagsFromPost = req.body.tags.split(',');
+    tagsFromPost.forEach(tagItem => {
+        const tag = new Tag({
+            name: tagItem,
+            postsIds: post.id
+        });
+        tag.save();
+    });
+
+
+
+
+
+
 });
 
 router.get('', (req, res, next) => {

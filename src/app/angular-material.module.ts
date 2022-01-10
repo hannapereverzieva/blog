@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
     imports: [
@@ -21,7 +22,9 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         MatProgressSpinnerModule,
         MatDividerModule,
         MatSidenavModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatChipsModule
+
     ],
     exports: [
         MatToolbarModule,
@@ -33,7 +36,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         MatProgressSpinnerModule,
         MatDividerModule,
         MatSidenavModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatChipsModule
     ]
 })
 export class AngularMaterialModule {}
