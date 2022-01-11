@@ -61,11 +61,13 @@ export class PostService {
       const postData = new FormData();
       const updatedTags = tags.join(',');
       console.log(updatedTags);
+      const dateConverted = date.toDateString();
       postData.append('title', title);
       postData.append('author', author);
       postData.append('content', content);
       postData.append('image', image, title);
       postData.append('tags', updatedTags);
+      postData.append('date', dateConverted);
       console.log(postData);
     this._httpClient
       .post<{ message: string; post: Post }>(`${this._baseUrl}/api/posts`, postData)

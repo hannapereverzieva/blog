@@ -59,11 +59,6 @@ router.post('', multer({storage: storage}).single('image'),(req, res, next) => {
         tag.save();
     });
 
-
-
-
-
-
 });
 
 router.get('', (req, res, next) => {

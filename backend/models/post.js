@@ -9,7 +9,8 @@ const postSchema = mongoose.Schema({
   imagePath: { type: String, required: true},
   likes: { type: [String] },
   comments: { type: [String] },
-  tags: { type: [String]}
+  tags: { type: [String]},
+  date: { type: String, required: true }
 });
 
 module.exports = mongoose.model('Post', postSchema);
