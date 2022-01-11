@@ -4,6 +4,8 @@ import { PostService } from '../post.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Post } from "../models/post";
 import { fileType } from './file-type.validator';
+import { MatChipInputEvent } from "@angular/material/chips";
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-create-page',
@@ -14,6 +16,8 @@ export class CreatePageComponent implements OnInit {
   postForm!: FormGroup;
   isLoading = false;
   imagePreview!: string;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags: string[] = [];
   private _mode = 'create';
   private _postId!: any;
   private _post! : any;
@@ -83,6 +87,24 @@ export class CreatePageComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  onAddTag(event: MatChipInputEvent): void {
+    const input = event.chipInput;
+    console.log(input);
+    const value = event.value;
+    if ((value || '').trim()) {
+      this.tags.push(value);
+    }
+    if (input) {
+      input.inputElement.value = '';
+    }
+  }
+  onRemoveTag(tag: string) {
+    const index = this.tags.indexOf(tag);
+    if (index >=0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
   onSavePost() {
     if (this.postForm.invalid) {
       return;
@@ -96,7 +118,8 @@ export class CreatePageComponent implements OnInit {
           this.postForm.value.authorControl,
           this.postForm.value.contentControl,
           new Date(),
-          this.postForm.value.imageControl
+          this.postForm.value.imageControl,
+          this.tags
       );
     } else {
       this._postService.updatePost(this.postForm.value.titleControl,
@@ -104,9 +127,8 @@ export class CreatePageComponent implements OnInit {
           this.postForm.value.contentControl,
           new Date(), this._postId,
           this.postForm.value.image);
+          //to do implement tags update
     }
-
-
 
     this.postForm.reset();
     this._router.navigate(['/']);

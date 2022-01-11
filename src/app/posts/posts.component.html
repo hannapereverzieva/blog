@@ -2,13 +2,23 @@
 
 <mat-drawer-container>
   <mat-drawer-content>
+    <mat-paginator
+            *ngIf="posts.length > 0"
+            [length]="totalPosts"
+            [pageSize]="postsPerPage"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="onChangePage($event)"></mat-paginator>
     <div class="posts" *ngFor="let post of posts">
       <app-post [post]="post" [openButtonIsVisible]="true"></app-post>
     </div>
   </mat-drawer-content>
-
   <mat-drawer mode="side" opened position="end">
     <h2>Popular Tags:</h2>
+    <mat-chip-list>
+      <mat-chip color="primary" *ngFor="let tag of tags" [selectable]="true" [removable]="false">
+        {{tag}}
+      </mat-chip>
+    </mat-chip-list>
     <mat-divider></mat-divider>
   </mat-drawer>
 </mat-drawer-container>

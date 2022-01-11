@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const Post = require("../models/post");
+const Tag = require("../models/tag");
 
 const router = express.Router();
 
@@ -32,9 +33,11 @@ router.post('', multer({storage: storage}).single('image'),(req, res, next) => {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author,
+        creator: 'userId',
         date: req.body.date,
         likes: req.body.likes,
-        imagePath: url + "/images/" + req.file.filename
+        imagePath: url + "/images/" + req.file.filename,
+        tags: req.body.tags
     });
     console.log(post);
     post.save().then((addedPost) => {
@@ -46,19 +49,39 @@ router.post('', multer({storage: storage}).single('image'),(req, res, next) => {
             }
         });
     });
+
+    const tagsFromPost = req.body.tags.split(',');
+    tagsFromPost.forEach(tagItem => {
+        const tag = new Tag({
+            name: tagItem,
+            postsIds: post.id
+        });
+        tag.save();
+    });
+
 });
 
 router.get('', (req, res, next) => {
-    //aggregate practice
-    Post.aggregate([{ $limit: 25 }, { $match: { author: 'Hanna' } }]);
-
-    //sort practice
-    Post.find()
+    const pageSize = +req.query.pagesize;
+    const currentPage = req.query.page;
+    const postQuery = Post.find();
+    let fetchedPosts;
+    if (pageSize && currentPage) {
+        postQuery
+            .skip(pageSize * (currentPage - 1))
+            .limit(pageSize);
+    }
+    postQuery
         .sort({ date: -1 })
-        .then((documents) => {
+        .then(documents => {
+            fetchedPosts = documents;
+            return Post.count();
+        })
+        .then(count => {
             res.status(200).json({
                 message: 'Posts were fetched successfully!',
-                posts: documents,
+                posts: fetchedPosts,
+                maxPosts: count
             });
         });
 });
