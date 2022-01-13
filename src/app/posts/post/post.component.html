@@ -35,10 +35,10 @@
     >
       OPEN
     </button>
-    <button [disabled]="!userIsAuth" mat-icon-button color="primary" aria-label="edit" [routerLink]="['/edit', post.id]" >
+    <button [disabled]="!userIsAuth && userId !== post.creator" mat-icon-button color="primary" aria-label="edit" [routerLink]="['/edit', post.id]" >
       <mat-icon>edit</mat-icon>
     </button>
-    <button  [disabled]="!userIsAuth" mat-icon-button color="warn" aria-label="delete" (click)="onDeletePost(post.id)">
+    <button  [disabled]="!userIsAuth && userId !== post.creator" mat-icon-button color="warn" aria-label="delete" (click)="onDeletePost(post.id)">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>

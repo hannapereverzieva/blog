@@ -11,6 +11,7 @@ export class PostComponent implements OnInit {
   @Input() public post!: Post;
   @Input() public openButtonIsVisible!: boolean;
   @Input() public userIsAuth!: boolean;
+  @Input() public  userId!: string | null;
   @Input() private _postsPerPage!: number;
   @Input() private _pageSizeOptions!: number;
   currentUserLiked = true;
@@ -22,7 +23,6 @@ export class PostComponent implements OnInit {
     if(this.userIsAuth) {
       this.currentUserLiked = !this.currentUserLiked;
     }
-
   }
 
   onDeletePost(id: any) {

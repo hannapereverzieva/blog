@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { PostService } from './post.service';
 import { LoadingService } from '../shared/services/loading.service';
 import { PageEvent } from "@angular/material/paginator";
-import { Tag } from "./models/tag";
 import { AuthService } from "../auth/auth.service";
 
 @Component({
@@ -21,6 +20,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSizeOptions = [1, 2, 3, 5, 10];
   userIsAuth = false;
+  userId!: string | null;
   private _postsSub!: Subscription;
   private _tagsSub!: Subscription;
   private _authStatusSub!: Subscription;
@@ -30,6 +30,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._postService.getPosts(this.postsPerPage, this.currentPage);
+    this.userId = this._authService.getUserId();
     this._postsSub = this._postService.getPostUpdateListener().subscribe((postData:{posts: Post[], postsCount: number}) => {
       this.totalPosts = postData.postsCount;
       this.posts = postData.posts;
@@ -43,6 +44,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     this._authStatusSub = this._authService.getAuthStatusListener()
         .subscribe(isAuth => {
           this.userIsAuth = isAuth;
+          this.userId = this._authService.getUserId();
         });
   }
 
