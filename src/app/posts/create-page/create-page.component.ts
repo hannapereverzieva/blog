@@ -40,7 +40,7 @@ export class CreatePageComponent implements OnInit {
             this._postService.getPost(this._postId).subscribe(postData => {
               this.isLoading = false;
               if(postData) {
-                this._post = {id: postData._id, title: postData.title, author: postData.author, content: postData.content, imagePath: postData.imagePath }
+                this._post = {id: postData._id, title: postData.title, author: postData.author,creator: postData.creator, content: postData.content, imagePath: postData.imagePath }
                 this.postForm.patchValue({
                   titleControl: this._post.title,
                   authorControl: this._post.author,

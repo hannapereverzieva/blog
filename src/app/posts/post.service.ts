@@ -40,6 +40,7 @@ export class PostService {
         }),
       )
       .subscribe((mappedPostsData) => {
+          console.log(mappedPostsData);
         this._posts = mappedPostsData.posts;
         this._postsUpdated.next({posts: [...this._posts], postsCount: mappedPostsData.maxPosts});
       });
@@ -53,8 +54,15 @@ export class PostService {
       return this._tagsUpdated.asObservable();
   }
 
-  getPost(id: string): Observable<{_id: string, title: string, author: string, content: string, date: Date, imagePath: string}> {
-    return this._httpClient.get<{_id: string, title: string, author: string, content: string, date: Date, imagePath: string}>(`${this._baseUrl}/api/posts/${id}`);
+  getPost(id: string): Observable<{_id: string, title: string, author: string, creator: string, content: string, date: Date, imagePath: string}> {
+    return this._httpClient.get<{
+        _id: string,
+        title: string,
+        author: string,
+        creator: string,
+        content: string,
+        date: Date,
+        imagePath: string}>(`${this._baseUrl}/api/posts/${id}`);
   }
 
   addPost(title: string, author: string, content: string, date: Date, image: File, tags: string[]) {
@@ -93,7 +101,8 @@ export class PostService {
               date: date,
               id: id,
               likes: [],
-              imagePath: image
+              imagePath: image,
+              creator: null
           };
       }
 

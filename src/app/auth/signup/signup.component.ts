@@ -5,16 +5,16 @@ import { Router } from '@angular/router';
 import { AuthService } from "../auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   isLoading = false;
-  loginForm: FormGroup;
+  signupForm: FormGroup;
   user!: User;
   constructor(private _router: Router, private _authService: AuthService) {
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
       emailControl: new FormControl('', [Validators.required, Validators.email]),
       passwordControl: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
@@ -23,26 +23,25 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   get emailControl() {
-    return this.loginForm.get('emailControl');
+    return this.signupForm.get('emailControl');
   }
 
   get passwordControl() {
-    return this.loginForm.get('passwordControl');
+    return this.signupForm.get('passwordControl');
   }
 
-  onSubmit(event: Event) {
+  onSignup(event: Event) {
     event.preventDefault();
-    if (this.loginForm.invalid) {
+    if (this.signupForm.invalid) {
       return;
     }
     this.isLoading = true;
     this._router.navigate(['/']);
 
     this.user = {
-      email: this.loginForm.value.emailControl,
-      password: this.loginForm.value.passwordControl,
+      email: this.signupForm.value.emailControl,
+      password: this.signupForm.value.passwordControl,
     };
-
-    this._authService.login(this.loginForm.value.emailControl, this.loginForm.value.passwordControl);
+    this._authService.createUser(this.signupForm.value.emailControl, this.signupForm.value.passwordControl)
   }
 }

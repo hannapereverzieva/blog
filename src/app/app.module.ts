@@ -16,6 +16,8 @@ import { LoadingService } from './shared/services/loading.service';
 import { SpinnerInterceptor } from './spinner.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AngularMaterialModule } from "./angular-material.module";
+import { SignupComponent } from "./auth/signup/signup.component";
+import { AuthInterceptor } from "./auth/auth-interceptor";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { AngularMaterialModule } from "./angular-material.module";
     CreatePageComponent,
     LoginComponent,
     NotFoundComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,11 @@ import { AngularMaterialModule } from "./angular-material.module";
       useClass: SpinnerInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
