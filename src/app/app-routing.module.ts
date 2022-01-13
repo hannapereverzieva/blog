@@ -5,14 +5,17 @@ import { PostPageComponent } from './posts/post-page/post-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CreatePageComponent } from './posts/create-page/create-page.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { SignupComponent } from "./auth/signup/signup.component";
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: PostsComponent },
   { path: 'post/:id', component: PostPageComponent },
+  { path: 'create', component: CreatePageComponent, canActivate: [AuthGuard] },
+  { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'create', component: CreatePageComponent },
-  { path: 'edit/:id', component: CreatePageComponent},
+  { path: 'edit/:id', component: CreatePageComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -23,5 +26,6 @@ const routes: Routes = [
     }),
   ],
   exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {}

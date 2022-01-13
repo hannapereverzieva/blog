@@ -10,6 +10,7 @@ import { PostService } from '../post.service';
 export class PostComponent implements OnInit {
   @Input() public post!: Post;
   @Input() public openButtonIsVisible!: boolean;
+  @Input() public userIsAuth!: boolean;
   @Input() private _postsPerPage!: number;
   @Input() private _pageSizeOptions!: number;
   currentUserLiked = true;
@@ -18,7 +19,10 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {}
 
   onToggleLike() {
-    this.currentUserLiked = !this.currentUserLiked;
+    if(this.userIsAuth) {
+      this.currentUserLiked = !this.currentUserLiked;
+    }
+
   }
 
   onDeletePost(id: any) {

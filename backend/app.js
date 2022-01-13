@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const postsRoutes = require('./routes/posts');
 const tagsRoutes = require('./routes/tags');
+const userRoutes = require('./routes/user');
 const path = require('path');
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/images', express.static(path.join('backend/images')));
 
 app.use('/api/posts', postsRoutes);
 app.use('/api/tags', tagsRoutes);
+app.use('/api/user', userRoutes);
 
 app.use('*', (req, res, next) => {
   res.status(404).json({
